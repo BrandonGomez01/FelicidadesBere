@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¡Te recibiste! 🎓</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0; font-family:'Segoe UI',sans-serif; background:#FFF7ED; color:#1F2937; overflow-x:hidden; text-align:center}
+  .screen{min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:30px 20px}
+  h1{font-size:2.6rem; color:#7C3AED; margin:10px 0; line-height:1.1}
+  h2{color:#7C3AED; font-size:1.9rem}
+  p{font-size:1.1rem; line-height:1.6; max-width:600px}
+  button{padding:15px 30px; border:none; border-radius:30px; font-size:1.15rem; font-weight:bold; cursor:pointer; margin:10px; background:#7C3AED; color:white; box-shadow:0 5px 20px rgba(124,58,237,.3)}
+  .btn-sec{background:white; color:#7C3AED; border:2px solid #E9D5FF}
+  #menu{display:none}
+  .opciones{display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-top:20px}
+  .card{width:160px; background:white; border-radius:22px; padding:22px 10px; box-shadow:0 8px 25px rgba(0,0,0,.08); cursor:pointer}
+  .card:hover{transform:scale(1.05)}
+  .card span{font-size:45px}
+  .seccion{display:none; padding:35px 20px; max-width:650px; margin:auto}
+  .seccion img{width:90%; max-width:340px; border-radius:16px; margin:12px 0}
+  /* Diploma */
+  .diploma{background:#FFFBEB; border:4px double #F59E0B; border-radius:15px; padding:30px 20px; margin:20px auto}
+  .diploma h3{font-size:1.8rem; margin:5px; color:#92400E}
+  .timeline{text-align:left; max-width:500px; margin:20px auto; border-left:3px solid #DDD6FE; padding-left:20px}
+  .timeline div{margin:18px 0}
+  .timeline b{color:#7C3AED}
+  .volver{background:#EDE9FE; color:#7C3AED}
+  .confetti{position:fixed; top:-20px; font-size:22px; animation:caer linear forwards; z-index:99; pointer-events:none}
+  @keyframes caer{to{transform:translateY(110vh) rotate(360deg); opacity:0}}
+  iframe{border-radius:15px; max-width:100%}
+</style>
+</head>
+<body>
+
+<!-- PANTALLA 1: PRINCIPAL -->
+<div class="screen" id="pantalla1">
+  <div style="font-size:70px">🎓</div>
+  <h1>¡TE RECIBISTE!<br>¡FELICITACIONES!</h1>
+  <p><b>Para [NOMBRE DE TU AMIGA]</b><br>Licenciada en [CARRERA]<br>Después de tanto esfuerzo, lo lograste.</p>
+  <button onclick="entrar()">Tocá acá 🎉</button>
+  <p style="font-size:.95rem; color:#6B7280">Tenés una sorpresa esperándote...</p>
+</div>
+
+<!-- PANTALLA 2: MENU -->
+<div class="screen" id="menu">
+  <h1>¡Lo lograste! 🥹🎓</h1>
+  <p>Elegí por dónde querés empezar:</p>
+  <div class="opciones">
+    <div class="card" onclick="abrir('carta')"><span>💌</span><br><b>Carta</b><br><small>Para vos</small></div>
+    <div class="card" onclick="abrir('logro')"><span>🎓</span><br><b>Tu logro</b><br><small>Tu camino</small></div>
+    <div class="card" onclick="abrir('diploma')"><span>🏆</span><br><b>Diploma</b><br><small>Descargalo</small></div>
+    <div class="card" onclick="abrir('cancion')"><span>🎵</span><br><b>Canción</b><br><small>Nuestra canción</small></div>
+    <div class="card" onclick="abrir('video')"><span>📹</span><br><b>Video sorpresa</b><br><small>Al final!</small></div>
+  </div>
+</div>
+
+<!-- CARTA -->
+<div class="seccion" id="carta">
+  <h2>Mi cartita para vos 💌</h2>
+  <p>
+    Acá escribí tu carta.<br><br>
+    Ejemplo: "No sabés lo orgulloso que estoy de vos. Te vi estudiar hasta tarde, rendir con nervios, querer dejar todo y seguir igual. Y hoy sos Licenciada. Te lo merecés más que nadie."<br><br>
+    Borrá esto y poné tu texto real.
+  </p>
+  <img src="fotos/foto1.jpg" alt="Foto 1">
+  <img src="fotos/foto2.jpg" alt="Foto 2">
+  <br><button class="volver" onclick="volverMenu()">Volver al menú</button>
+</div>
+
+<!-- SU LOGRO -->
+<div class="seccion" id="logro">
+  <h2>Tu camino hasta acá 🎓</h2>
+  <div class="timeline">
+    <div><b>20XX - Empezaste</b><br>Con miedo, con dudas, pero empezaste.</div>
+    <div><b>20XX - Primer año aprobado</b><br>Ya no había vuelta atrás.</div>
+    <div><b>20XX - Casi abandonás</b><br>Pero seguiste igual, con todo.</div>
+    <div><b>20XX - Última materia</b><br>La rendiste y la rompiste.</div>
+    <div><b>¡2026 - TE RECIBISTE! 🎉</b><br>Licenciada. Lo lograste.</div>
+  </div>
+  <br><button class="volver" onclick="volverMenu()">Volver al menú</button>
+</div>
+
+<!-- DIPLOMA FALSO -->
+<div class="seccion" id="diploma">
+  <h2>Tu diploma 🏆</h2>
+  <p>Sacale captura y subilo a Instagram!</p>
+  <div class="diploma">
+    <div style="font-size:40px">🎓</div>
+    <p style="letter-spacing:3px; font-size:.9rem">DIPLOMA DE HONOR</p>
+    <h3>[NOMBRE DE TU AMIGA]</h3>
+    <p>Por haberse recibido de</p>
+    <h3>Licenciada en [CARRERA]</h3>
+    <p>Con mucho esfuerzo, noches sin dormir y mucha garra.<br><br>Buenos Aires, Noviembre 2026</p>
+    <p>___________________<br><small>Firma de tu mejor amigo</small></p>
+  </div>
+  <br><button class="volver" onclick="volverMenu()">Volver al menú</button>
+</div>
+
+<!-- CANCION -->
+<div class="seccion" id="cancion">
+  <h2>Nuestra canción 🎵</h2>
+  <p>Esta canción me hace acordar a todo lo que pasamos estudiando.</p>
+  <!-- CAMBIA ESTE LINK POR TU CANCION DE YOUTUBE -->
+  <iframe width="100%" height="220" src="https://www.youtube.com/embed/3JWTaaS7LdU" frameborder="0" allowfullscreen></iframe>
+  <br><br><button class="volver" onclick="volverMenu()">Volver al menú</button>
+</div>
+
+<!-- VIDEO SORPRESA -->
+<div class="seccion" id="video">
+  <h2>Video sorpresa 📹</h2>
+  <p>Te grabamos esto entre todos porque te queremos y estamos re orgullosos de vos.</p>
+  <!-- CAMBIA ESTE LINK POR TU VIDEO DE YOUTUBE -->
+  <iframe width="100%" height="250" src="https://www.youtube.com/embed/3JWTaaS7LdU" frameborder="0" allowfullscreen></iframe>
+  <p><b>¡TE AMAMOS, LICENCIADA! 🎓❤️</b></p>
+  <br><button class="volver" onclick="volverMenu()">Volver al menú</button>
+</div>
+
+<script>
+  // Confetti
+  const emojis = ['🎓','🎉','✨','🎊','💜','⭐'];
+  function tirarConfetti(){
+    for(let i=0;i=0;i<60;i++){
+      const c = document.createElement('div');
+      c.className='confetti';
+      c.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      c.style.left = Math.random()*100+'vw';
+      c.style.animationDuration = (Math.random()*2+2)+'s';
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(), 4000);
+    }
+  }
+  tirarConfetti();
+  setInterval(tirarConfetti, 3500);
+
+  function entrar(){
+    document.getElementById('pantalla1').style.display='none';
+    document.getElementById('menu').style.display='flex';
+    window.scrollTo(0,0);
+  }
+  function abrir(id){
+    document.getElementById('menu').style.display='none';
+    document.querySelectorAll('.seccion').forEach(s=>s.style.display='none');
+    document.getElementById(id).style.display='block';
+    window.scrollTo(0,0);
+  }
+  function volverMenu(){
+    document.querySelectorAll('.seccion').forEach(s=>s.style.display='none');
+    document.getElementById('menu').style.display='flex';
+    window.scrollTo(0,0);
+  }
+</script>
+</body>
+</html>

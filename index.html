@@ -12,7 +12,6 @@
   h2{color:#7C3AED; font-size:1.9rem}
   p{font-size:1.1rem; line-height:1.6; max-width:600px}
   button{padding:15px 30px; border:none; border-radius:30px; font-size:1.15rem; font-weight:bold; cursor:pointer; margin:10px; background:#7C3AED; color:white; box-shadow:0 5px 20px rgba(124,58,237,.3)}
-  .btn-sec{background:white; color:#7C3AED; border:2px solid #E9D5FF}
   #menu{display:none}
   .opciones{display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-top:20px}
   .card{width:160px; background:white; border-radius:22px; padding:22px 10px; box-shadow:0 8px 25px rgba(0,0,0,.08); cursor:pointer}
@@ -20,7 +19,6 @@
   .card span{font-size:45px}
   .seccion{display:none; padding:35px 20px; max-width:650px; margin:auto}
   .seccion img{width:90%; max-width:340px; border-radius:16px; margin:12px 0}
-  /* Diploma */
   .diploma{background:#FFFBEB; border:4px double #F59E0B; border-radius:15px; padding:30px 20px; margin:20px auto}
   .diploma h3{font-size:1.8rem; margin:5px; color:#92400E}
   .timeline{text-align:left; max-width:500px; margin:20px auto; border-left:3px solid #DDD6FE; padding-left:20px}
@@ -29,12 +27,24 @@
   .volver{background:#EDE9FE; color:#7C3AED}
   .confetti{position:fixed; top:-20px; font-size:22px; animation:caer linear forwards; z-index:99; pointer-events:none}
   @keyframes caer{to{transform:translateY(110vh) rotate(360deg); opacity:0}}
-  iframe{border-radius:15px; max-width:100%}
+  /* GALERIA */
+  .galeria{position:relative; max-width:380px; margin:20px auto}
+  .galeria img{width:100%; max-width:380px; height:420px; object-fit:cover; display:none; border-radius:18px}
+  .galeria img.activa{display:block}
+  .galeria-btn{padding:10px 18px; font-size:1rem; background:white; color:#7C3AED}
+  .puntos{margin-top:10px; font-size:1.1rem; letter-spacing:5px}
+  /* CONTADOR */
+  .contador{background:white; border:2px solid #E9D5FF; border-radius:20px; padding:25px 15px; margin:20px auto}
+  .contador b{font-size:3rem; color:#7C3AED; display:block}
 </style>
 </head>
 <body>
 
-<!-- PANTALLA 1: PRINCIPAL -->
+<audio id="musicaFondo" loop>
+  <source src="musica/cancion.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PANTALLA 1 -->
 <div class="screen" id="pantalla1">
   <div style="font-size:70px">🎓</div>
   <h1>¡TE RECIBISTE!<br>¡FELICITACIONES!</h1>
@@ -43,46 +53,65 @@
   <p style="font-size:.95rem; color:#6B7280">Tenés una sorpresa esperándote...</p>
 </div>
 
-<!-- PANTALLA 2: MENU -->
+<!-- MENU -->
 <div class="screen" id="menu">
   <h1>¡Lo lograste! 🥹🎓</h1>
   <p>Elegí por dónde querés empezar:</p>
   <div class="opciones">
     <div class="card" onclick="abrir('carta')"><span>💌</span><br><b>Carta</b><br><small>Para vos</small></div>
+    <div class="card" onclick="abrir('galeria')"><span>📸</span><br><b>Galería</b><br><small>Nuestras fotos</small></div>
     <div class="card" onclick="abrir('logro')"><span>🎓</span><br><b>Tu logro</b><br><small>Tu camino</small></div>
     <div class="card" onclick="abrir('diploma')"><span>🏆</span><br><b>Diploma</b><br><small>Descargalo</small></div>
     <div class="card" onclick="abrir('cancion')"><span>🎵</span><br><b>Canción</b><br><small>Nuestra canción</small></div>
-    <div class="card" onclick="abrir('video')"><span>📹</span><br><b>Video sorpresa</b><br><small>Al final!</small></div>
+    <div class="card" onclick="abrir('video')"><span>🎁</span><br><b>Sorpresa</b><br><small>Al final!</small></div>
   </div>
+  <br>
+  <button onclick="pausarMusica()" id="btnMusica" style="background:white; color:#7C3AED; font-size:.95rem; padding:10px 20px;">⏸️ Pausar música</button>
 </div>
 
 <!-- CARTA -->
 <div class="seccion" id="carta">
-  <h2>Mi cartita para vos 💌</h2>
-  <p>
-    Acá escribí tu carta.<br><br>
-    Ejemplo: "No sabés lo orgulloso que estoy de vos. Te vi estudiar hasta tarde, rendir con nervios, querer dejar todo y seguir igual. Y hoy sos Licenciada. Te lo merecés más que nadie."<br><br>
-    Borrá esto y poné tu texto real.
-  </p>
-  <img src="fotos/foto1.jpg" alt="Foto 1">
-  <img src="fotos/foto2.jpg" alt="Foto 2">
+  <h2>Nuestra cartita para vos 💌</h2>
+  <p>Acá escribí tu carta.<br><br>Ejemplo: "No sabés lo orgulloso que estoy de vos. Te vi estudiar hasta tarde, rendir con nervios, querer dejar todo y seguir igual. Y hoy sos Licenciada. Te lo merecés más que nadie."</p>
   <br><button class="volver" onclick="volverMenu()">Volver al menú</button>
 </div>
 
-<!-- SU LOGRO -->
+<!-- GALERIA NUEVA -->
+<div class="seccion" id="galeria">
+  <h2>Nuestras fotos 📸</h2>
+  <p>Algunos de nuestros mejores recuerdos.</p>
+  <div class="galeria">
+    <img src="fotos/foto1.jpg" class="activa" alt="Foto 1">
+    <img src="fotos/foto2.jpg" alt="Foto 2">
+    <img src="fotos/foto3.jpg" alt="Foto 3">
+    <img src="fotos/foto4.jpg" alt="Foto 4">
+  </div>
+  <button class="galeria-btn volver" onclick="cambiarFoto(-1)">⬅️ Anterior</button>
+  <button class="galeria-btn volver" onclick="cambiarFoto(1)">Siguiente ➡️</button>
+  <div class="puntos" id="puntos">● ○ ○ ○</div>
+  <br><button class="volver" onclick="volverMenu()">Volver al menú</button>
+</div>
+
+<!-- SU LOGRO + CONTADOR NUEVO -->
 <div class="seccion" id="logro">
   <h2>Tu camino hasta acá 🎓</h2>
+  <div class="contador">
+    <p style="margin:0">El <b>03/03/2021</b> arrancaste y hoy al <b>26/11/2026</b> pasaron</p>
+    <b id="diasTotal">2094</b>
+    <p style="margin:0; font-size:1.2rem"><b>días y te recibiste 🎓</b></p>
+    <p style="font-size:.95rem; color:#6B7280">2094 días de esfuerzo, de noches sin dormir, de querer dejar todo y de seguir igual. Valió la pena.</p>
+  </div>
   <div class="timeline">
-    <div><b>20XX - Empezaste</b><br>Con miedo, con dudas, pero empezaste.</div>
-    <div><b>20XX - Primer año aprobado</b><br>Ya no había vuelta atrás.</div>
-    <div><b>20XX - Casi abandonás</b><br>Pero seguiste igual, con todo.</div>
-    <div><b>20XX - Última materia</b><br>La rendiste y la rompiste.</div>
-    <div><b>¡2026 - TE RECIBISTE! 🎉</b><br>Licenciada. Lo lograste.</div>
+    <div><b>03/03/2021 - Empezaste</b><br>Con miedo, con dudas, pero empezaste.</div>
+    <div><b>Primer año aprobado</b><br>Ya no había vuelta atrás.</div>
+    <div><b>Casi abandonás</b><br>Pero seguiste igual, con todo.</div>
+    <div><b>Última materia</b><br>La rendiste y la rompiste.</div>
+    <div><b>26/11/2026 - ¡TE RECIBISTE! 🎉</b><br>Licenciada. Lo lograste.</div>
   </div>
   <br><button class="volver" onclick="volverMenu()">Volver al menú</button>
 </div>
 
-<!-- DIPLOMA FALSO -->
+<!-- DIPLOMA -->
 <div class="seccion" id="diploma">
   <h2>Tu diploma 🏆</h2>
   <p>Sacale captura y subilo a Instagram!</p>
@@ -93,7 +122,6 @@
     <p>Por haberse recibido de</p>
     <h3>Licenciada en [CARRERA]</h3>
     <p>Con mucho esfuerzo, noches sin dormir y mucha garra.<br><br>Buenos Aires, Noviembre 2026</p>
-    <p>___________________<br><small>Firma de tu mejor amigo</small></p>
   </div>
   <br><button class="volver" onclick="volverMenu()">Volver al menú</button>
 </div>
@@ -101,27 +129,28 @@
 <!-- CANCION -->
 <div class="seccion" id="cancion">
   <h2>Nuestra canción 🎵</h2>
-  <p>Esta canción me hace acordar a todo lo que pasamos estudiando.</p>
-  <!-- CAMBIA ESTE LINK POR TU CANCION DE YOUTUBE -->
-  <iframe width="100%" height="220" src="https://www.youtube.com/embed/3JWTaaS7LdU" frameborder="0" allowfullscreen></iframe>
-  <br><br><button class="volver" onclick="volverMenu()">Volver al menú</button>
+  <p>Esta canción ya está sonando desde que entraste al menú.</p>
+  <audio controls loop style="width:100%">
+    <source src="musica/cancion.mp3" type="audio/mpeg">
+  </audio>
+  <br><button class="volver" onclick="volverMenu()">Volver al menú</button>
 </div>
 
-<!-- VIDEO SORPRESA -->
+<!-- SORPRESA -->
 <div class="seccion" id="video">
-  <h2>Video sorpresa 📹</h2>
+  <h2>Sorpresa 🎁</h2>
   <p>Te grabamos esto entre todos porque te queremos y estamos re orgullosos de vos.</p>
-  <!-- CAMBIA ESTE LINK POR TU VIDEO DE YOUTUBE -->
-  <iframe width="100%" height="250" src="https://www.youtube.com/embed/3JWTaaS7LdU" frameborder="0" allowfullscreen></iframe>
+  <video controls width="100%" style="border-radius:15px">
+    <source src="videos/video.mp4" type="video/mp4">
+  </video>
   <p><b>¡TE AMAMOS, LICENCIADA! 🎓❤️</b></p>
   <br><button class="volver" onclick="volverMenu()">Volver al menú</button>
 </div>
 
 <script>
-  // Confetti
   const emojis = ['🎓','🎉','✨','🎊','💜','⭐'];
   function tirarConfetti(){
-    for(let i=0;i<60;i++){
+    for(let i=0; i<60; i++){
       const c = document.createElement('div');
       c.className='confetti';
       c.textContent = emojis[Math.floor(Math.random()*emojis.length)];
@@ -137,7 +166,14 @@
   function entrar(){
     document.getElementById('pantalla1').style.display='none';
     document.getElementById('menu').style.display='flex';
+    document.getElementById('musicaFondo').play();
     window.scrollTo(0,0);
+  }
+  function pausarMusica(){
+    const musica = document.getElementById('musicaFondo');
+    const btn = document.getElementById('btnMusica');
+    if(musica.paused){ musica.play(); btn.textContent='⏸️ Pausar música'; }
+    else{ musica.pause(); btn.textContent='▶️ Poner música'; }
   }
   function abrir(id){
     document.getElementById('menu').style.display='none';
@@ -150,6 +186,24 @@
     document.getElementById('menu').style.display='flex';
     window.scrollTo(0,0);
   }
+
+  // GALERIA
+  let fotoActual = 0;
+  function cambiarFoto(direccion){
+    const fotos = document.querySelectorAll('#galeria .galeria img');
+    fotos[fotoActual].classList.remove('activa');
+    fotoActual = (fotoActual + direccion + fotos.length) % fotos.length;
+    fotos[fotoActual].classList.add('activa');
+    let puntos = '';
+    fotos.forEach((_, i)=>{ puntos += i===fotoActual ? '● ' : '○ '; });
+    document.getElementById('puntos').textContent = puntos.trim();
+  }
+
+  // CONTADOR DE DIAS - se calcula solo
+  const inicio = new Date(2021, 2, 3);
+  const fin = new Date(2026, 10, 26);
+  const dias = Math.round((fin - inicio) / (1000*60*60*24));
+  document.getElementById('diasTotal').textContent = dias;
 </script>
 </body>
 </html>
